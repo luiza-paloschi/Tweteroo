@@ -34,7 +34,9 @@ app.get("/tweets", (_, res) => {
     const newTweets = tweets.map((item) => { 
        return {...item, avatar: users[0].avatar};
     })
-    res.send(newTweets);
+    const limited = newTweets.map(item, index => index < 10);
+    
+    res.send(limited);
 })
 
 app.listen(PORT, ()=> console.log(`Servidor funcionando na porta ${PORT}`));
