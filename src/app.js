@@ -26,4 +26,15 @@ app.post("/tweets", (req, res) => {
     res.send("OK!");
 })
 
+app.get("/tweets", (_, res) => {
+    if (tweets.length === 0){
+        return res.send(tweets);
+    }
+
+    const newTweets = tweets.map((item) => { 
+       return {...item, avatar: users[0].avatar};
+    })
+    res.send(newTweets);
+})
+
 app.listen(PORT, ()=> console.log(`Servidor funcionando na porta ${PORT}`));
