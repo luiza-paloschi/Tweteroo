@@ -15,5 +15,15 @@ app.post("/sign-up", (req, res) => {
     res.send("OK!");
 })
 
+app.post("/tweets", (req, res) => {
+    const tweet = req.body;
+    const signedIn = users.find(user => user.username === tweet.username);
+    if (!signedIn){
+        console.log("aaaaaaaa")
+        return res.send("UNAUTHORIZED")
+    }
+    tweets.push(tweet);
+    res.send("OK!");
+})
 
 app.listen(PORT, ()=> console.log(`Servidor funcionando na porta ${PORT}`));
