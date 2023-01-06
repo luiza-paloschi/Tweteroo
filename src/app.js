@@ -34,8 +34,8 @@ app.get("/tweets", (_, res) => {
     const newTweets = tweets.map((item) => { 
        return {...item, avatar: users[0].avatar};
     })
-    const limited = newTweets.map((_, index) => index < 10);
-    
+    const limited = newTweets.filter((item, index) => index > newTweets.length -11);
+    console.log(limited)
     res.send(limited);
 })
 
