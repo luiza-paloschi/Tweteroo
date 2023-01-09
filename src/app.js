@@ -11,6 +11,9 @@ const tweets = [];
 
 app.post("/sign-up", (req, res) => {
     const user = req.body;
+    if(!user.username || !user.avatar){
+        return res.status(400).send("Os campos não estão preenchidos corretamente!")
+    }
     users.push(user);
     res.status(201).send("OK");
 })
@@ -20,6 +23,9 @@ app.post("/tweets", (req, res) => {
     const signedIn = users.find(user => user.username === tweet.username);
     if (!signedIn){
         return res.sendStatus(401);
+    }
+    if(!tweet.tweet){
+        return res.status(400).send("Não é possível fazer um tweet vazio!")
     }
 
     tweets.push(tweet);
